@@ -1,0 +1,259 @@
+<div class="volunteer-details">
+  <mat-card>
+    <mat-horizontal-stepper #stepper [linear]="true">
+      <mat-step [stepControl]="profileForm" errorMessage="Personal info is required."
+       [completed]="profileForm.valid">
+
+        <form [formGroup]="profileForm">
+          <ng-template matStepLabel>Profile Info</ng-template>
+
+          <mat-card>
+            <!-- <mat-card-header>Profile Information</mat-card-header> -->
+
+            <mat-card-content>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" placeholder="Ex: John" >
+                  </mat-form-field>
+                </div>
+
+                <!-- <div class="col-sm-4">
+                  <mat-form-field class="w-100">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput formControlName="middleName" >
+                  </mat-form-field>
+                </div> -->
+
+                <div class="col-sm-12 col-md-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" placeholder="Ex: Travis" >
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="sgs@dattapettam.com" >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone" placeholder="Ex: 9999999999" >
+                  </mat-form-field>
+                </div>
+
+                <!-- <div class="col-sm-3">
+                  <mat-form-field>
+                    <mat-label>Age</mat-label>
+                    <input matInput formControlName="age" placeholder="" >
+                  </mat-form-field>
+                </div> -->
+
+                <!-- <div class="col-sm-3">
+                  <mat-radio-group>
+                    <mat-label>Gender</mat-label>
+                    <mat-radio-button>Male</mat-radio-button>
+                    <mat-radio-button>Female</mat-radio-button>
+                  </mat-radio-group>
+                </div> -->
+              </div>
+
+              <div formGroupName="address">
+                <!-- <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field class="w-100">
+                      <mat-label>Address Line1</mat-label>
+                      <input matInput formControlName="street" placeholder="sgs@dattapettam.com" >
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field class="w-100">
+                      <mat-label>Address Line2</mat-label>
+                      <input matInput formControlName="street2" placeholder="sgs@dattapettam.com" >
+                    </mat-form-field>
+                  </div>
+                </div> -->
+
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <mat-form-field class="w-100">
+                      <mat-label>City</mat-label>
+                      <input matInput formControlName="city" placeholder="Ex: Plano" >
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-sm-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>State</mat-label>
+                      <input matInput formControlName="state" placeholder="Ex: Texas" >
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <mat-form-field class="w-100">
+                      <mat-label>Zip</mat-label>
+                      <input matInput formControlName="zip" placeholder="Ex: 75234" >
+                    </mat-form-field>
+                  </div> -->
+                </div>
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <!-- <p>Complete the form to enable button.</p> [disabled]="!profileForm.valid" -->
+              <button mat-raised-button matStepperNext
+               [disabled]="!profileForm.valid" color="primary">Next</button>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+  <!--
+        <hr>
+        <p>Form Value: {{ profileForm.value | json }}</p>
+        <p>Form Status: {{ profileForm.status }}</p> -->
+      </mat-step>
+
+      <mat-step [stepControl]="ageFormGroup" errorMessage="Age is required." [completed]="ageFormGroup.valid">
+        <mat-card>
+          <mat-card-content>
+            <form [formGroup]="ageFormGroup">
+              <ng-template matStepLabel>Age restriction</ng-template>
+
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <mat-radio-group formControlName="age">
+                    <mat-label>Are you above 15?</mat-label>
+                    <mat-radio-button value="Y">Yes</mat-radio-button>
+                    <mat-radio-button value="N">No</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <div>
+              <button mat-raised-button matStepperPrevious >Back</button>
+              <button mat-raised-button matStepperNext
+               [disabled]="!ageFormGroup.valid" color="primary">Next</button>
+            </div>
+        </mat-card-actions>
+        </mat-card>
+      </mat-step>
+
+      <mat-step [stepControl]="confirmFormGroup" errorMessage="Availability & Confirmation">
+        <form [formGroup]="confirmFormGroup">
+          <ng-template matStepLabel>Confirm</ng-template>
+
+          <mat-card>
+            <mat-card-content>
+              <div class="d-flex justify-content-center">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Available Services</mat-label>
+                    <mat-select formControlName="availableServices">
+                      <mat-option *ngFor="let food of foods | async" [value]="food.value">
+                        {{food.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="slots-tbl">
+                <table mat-table *ngIf="ageFormGroup.value.age === 'Y'"
+                  [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="date">
+                      <th mat-header-cell *matHeaderCellDef> Dates </th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="isMorning">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-label>Morning</mat-label>
+                      <!-- <mat-checkbox (click)="$event.stopPropagation()" (change)="SelectAllspeak($event)"
+                                    [checked]="isAllspeakSelected()"
+                                    [indeterminate]="!isAllspeakSelected()">
+                      Speak?</mat-checkbox> -->
+                    </th>
+                      <td mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()"  [(ngModel)]="row.isMorning" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="isAfternoon">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-label>Afternoon</mat-label>
+                        <!-- <mat-checkbox (click)="$event.stopPropagation()" (change)="SelectAllwrite($event)"
+                                    [checked]="isAllwriteSelected()"
+                                    [indeterminate]="!isAllwriteSelected()">
+                        Write?</mat-checkbox> -->
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation();" [(ngModel)]="row.isAfternoon" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="isFullDay">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-label>Full Day</mat-label>
+                        <!-- <mat-checkbox (click)="$event.stopPropagation()" (change)="SelectAllwrite($event)"
+                                    [checked]="isAllwriteSelected()"
+                                    [indeterminate]="!isAllwriteSelected()">
+                        Read?</mat-checkbox> -->
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation();" [(ngModel)]="row.isFullDay" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+              </div>
+            </mat-card-content>
+            <mat-card-footer>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option *ngFor="let opt of typeOptions" [value]="opt.value">
+                        {{opt.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <mat-form-field class="w-100">
+                    <mat-label>BG Batch</mat-label>
+                    <input matInput formControlName="bgBatchNum" placeholder="Batch Number" >
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- <hr>
+              <p>Form Value: {{ confirmFormGroup.value | json }}</p>
+              <p>MatTable Value: {{ dataSource.data | json }}</p>
+              <p>Form Status: {{ confirmFormGroup.status }}</p> -->
+            </mat-card-footer>
+
+            <mat-card-actions>
+              <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperNext (click)="onSubmit()"
+                [disabled]="!confirmFormGroup.valid" color="primary">Submit</button>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>
+

@@ -1,0 +1,25 @@
+.volunteer-details {
+  width: 70vw;
+
+  button {
+    margin-right: 15px;
+  }
+
+  mat-radio-group {
+    mat-label {
+      padding-right: 8px;
+    }
+  }
+
+  .slots-tbl {
+    overflow-x: auto;
+
+    table {
+      margin-bottom: 22px;
+    }
+  }
+
+  @media only screen and (max-width: 576px) {
+    width: calc(100vw - 18px);
+  }
+}
